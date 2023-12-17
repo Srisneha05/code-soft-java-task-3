@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+public class ATMInterface {
+    private static double accountBalance = 1000.0;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to the ATM!");
+
+        while (true) {
+            System.out.println("\n1. Check Balance");
+            System.out.println("2. Withdraw Cash");
+            System.out.println("3. Deposit Cash");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option (1-4): ");
+
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    checkBalance();
+                    break;
+                case 2:
+                    withdrawCash();
+                    break;
+                case 3:
+                    depositCash();
+                    break;
+                case 4:
+                    System.out.println("Thank you for using the ATM. Goodbye!");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please choose a valid option.");
+            }
+        }
+    }
+
+    private static void checkBalance() {
+        System.out.println("Your account balance is: $" + accountBalance);
+    }
+
+    private static void withdrawCash() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the amount to withdraw: $");
+        double amount = scanner.nextDouble();
+
+        if (amount > 0 && amount <= accountBalance) {
+            accountBalance -= amount;
+            System.out.println("Transaction successful. Remaining balance: $" + accountBalance);
+        } else {
+            System.out.println("Invalid amount or insufficient funds.");
+        }
+    }
+
+    private static void depositCash() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the amount to deposit: $");
+        double amount = scanner.nextDouble();
+
+        if (amount > 0) {
+            accountBalance += amount;
+            System.out.println("Deposit successful. New balance: $" + accountBalance);
+        } else {
+            System.out.println("Invalid amount for deposit.");
+        }
+    }
+}
